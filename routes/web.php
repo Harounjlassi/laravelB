@@ -12,6 +12,7 @@ Route::get('/category/all', [CategoryController::class,'AllCat'])->name('all.cat
 Route::post('/category/add', [CategoryController::class,'AddCat'])->name('store.category');
 Route::get('categorie/edit/{id}', [CategoryController::class,'EditCat']);
 Route::post('category/update/{id}', [CategoryController::class,'Update']);
+Route::get('softdelete/category/{id}', [CategoryController::class,'softDelate']);
 
 Route::middleware([
     'auth:sanctum',

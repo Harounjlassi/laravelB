@@ -70,7 +70,7 @@
                                         </td> 
                                         <td > 
                                             <a href="{{ url('categorie/edit/'.$category->id)}}" class="btn btn-info">Edit</a>
-                                            <a href="" class="btn btn-danger">delete</a>
+                                            <a href="{{ url('softdelete/category/'.$category->id)}}" class="btn btn-danger">delete</a>
                                         </td> 
 
                                     </tr>
@@ -115,6 +115,89 @@
             </div>
             
         </div>
+
+
+
+{{-- //Trash PArt --}}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                      
+                        <div class="card-header">
+                            Trash List
+                        </div>
+                            
+                            
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">sL No</th>
+                                        <th scope="col">Category NAME</th>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Created At</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    
+                                    {{-- @php($i=1) --}}
+                                    @foreach ($trachCat as $category )
+                                        
+                                    <tr>
+                                        <th scope="row">{{$categories->firstItem()+$loop->index}}</th>
+                                        
+                                        <td>{{ $category->category_name}}</td>
+                                        
+                                        {{-- // one to many relationship fel model eloquent ORM --}}
+                                        {{-- <td>{{ $category->user->name}}</td> --}}
+
+
+                                        {{-- // one to many relationship using query builder --}}
+                                        <td>{{ $category->name}}</td>
+
+                                        
+                                        
+                                        <td>
+                                            @if($category->created_at==NULL)
+                                            <span class="text-danger">No Date Set</span>
+                                            @else
+                                            {{--  using query builer --}}
+                                            {{-- {{ Carbon\Carbon::parse($category->created_at)->diffForHumans()}} --}}
+                                            {{--  using eloquent --}}
+
+                                            {{ $category->created_at->diffForHumans()}}
+                                            @endif
+
+                                        </td> 
+                                        <td > 
+                                            <a href="{{ url('categorie/edit/'.$category->id)}}" class="btn btn-info">Edit</a>
+                                            <a href="" class="btn btn-danger">delete</a>
+                                        </td> 
+
+                                    </tr>
+                    
+                                    @endforeach
+                                    
+                                    
+                                </tbody>
+                            </table>
+                            {{ $categories->links() }}
+                            
+                            
+                        </div>
+
+
+
+
+
+                </div>
+            
+            
+        </div>
+
         </div>
         </div>
         </div>

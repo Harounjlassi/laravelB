@@ -21,6 +21,12 @@ class CategoryController extends Controller
         // $categories=Category::all();
         //$categories=Category::latest()->get();
         $categories=Category::latest()->paginate(5);
+
+        //Soft delete Data Restore at dataForse
+        $trachCat=Category::onlyTrashed()->latest()->paginate(3);
+
+
+
         
         // using query builder 
         
@@ -41,7 +47,7 @@ class CategoryController extends Controller
 
 
 
-        return view('admin.category.index',compact('categories') );
+        return view('admin.category.index',compact('categories','trachCat') );
     }
     public function AddCat(Request $request) {
         $validatedData = $request->validate( [
@@ -119,7 +125,16 @@ class CategoryController extends Controller
 
 
         return Redirect()->route('all.category')->with('success','Category Updated Successfull');
-
-
+        
+        
     }
+    
+    public function softDelate($id){
+        //using eloquent 
+        
+        
+        $delete = Category::find($id)->delete();
+        return Redirect()->back()->with('success','Category Soft Deleted Successfull');
+
+}
 }
