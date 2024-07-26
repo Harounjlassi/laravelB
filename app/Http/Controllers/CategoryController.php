@@ -121,7 +121,7 @@ class CategoryController extends Controller
          $data=array();
         $data['category_name']=$request->category_name;
         $data['user_id']=Auth::user()->id;
-        DB::table('categories')->update($data);
+        DB::table('categories')->where('id',$id)->update($data);
 
 
         return Redirect()->route('all.category')->with('success','Category Updated Successfull');
@@ -135,6 +135,43 @@ class CategoryController extends Controller
         
         $delete = Category::find($id)->delete();
         return Redirect()->back()->with('success','Category Soft Deleted Successfull');
+        
+    }
+    public function Restore($id){
+        $delete=Category::withTrashed()->find($id)->restore();
+        
+    return Redirect()->back()->with('success','Category restored   Successfull');
+    
+}
+public function Pdelete($id){
+    $delete=Category::onlyTrashed()->find($id)->forceDelete();
+    return Redirect()->back()->with('success','Category Permanently    Deleted');
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

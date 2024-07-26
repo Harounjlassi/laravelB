@@ -13,6 +13,8 @@ Route::post('/category/add', [CategoryController::class,'AddCat'])->name('store.
 Route::get('categorie/edit/{id}', [CategoryController::class,'EditCat']);
 Route::post('category/update/{id}', [CategoryController::class,'Update']);
 Route::get('softdelete/category/{id}', [CategoryController::class,'softDelate']);
+Route::get('categorie/restore/{id}', [CategoryController::class,'Restore']);
+Route::get('pdelate/category/{id}', [CategoryController::class,'Pdelete']);
 
 Route::middleware([
     'auth:sanctum',

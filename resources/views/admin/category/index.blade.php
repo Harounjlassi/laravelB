@@ -173,8 +173,8 @@
 
                                         </td> 
                                         <td > 
-                                            <a href="{{ url('categorie/edit/'.$category->id)}}" class="btn btn-info">Edit</a>
-                                            <a href="" class="btn btn-danger">delete</a>
+                                            <a href="{{ url('categorie/restore/'.$category->id)}}" class="btn btn-info">Restore</a>
+                                            <a href="{{ url('pdelate/category/'.$category->id)}}" class="btn btn-danger">P Delete</a>
                                         </td> 
 
                                     </tr>
